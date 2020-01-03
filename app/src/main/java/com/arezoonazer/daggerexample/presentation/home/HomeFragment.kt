@@ -3,7 +3,6 @@ package com.arezoonazer.daggerexample.presentation.home
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -13,14 +12,18 @@ import android.view.ViewGroup
 import android.widget.LinearLayout.VERTICAL
 import android.widget.ProgressBar
 import com.arezoonazer.daggerexample.R
-import com.arezoonazer.daggerexample.data.repository.HomeRepository
+import com.arezoonazer.daggerexample.presentation.ViewModelProviderFactory
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class HomeFragment : Fragment() {
+class HomeFragment : DaggerFragment() {
     private val TAG = "HomeFragment"
     private lateinit var viewModel: HomeViewModel
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: HomeAdapter
     private lateinit var progressbar: ProgressBar
+
+    @Inject lateinit var adapter: HomeAdapter
+    @Inject lateinit var viewModelFactory: ViewModelProviderFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +54,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun initData() {
-        val factory = HomeViewModelFactory(HomeRepository.getHomeReposInstance())
-        viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
-        adapter = HomeAdapter()
+//        val factory = HomeViewModelFactory(HomeRepository.getHomeReposInstance())
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+//        adapter = HomeAdapter()
     }
 
     private fun getHomeData() {

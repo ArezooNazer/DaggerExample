@@ -1,6 +1,6 @@
 package com.arezoonazer.daggerexample.presentation
 
-import com.arezoonazer.daggerexample.di.DaggerAppComponent
+import com.arezoonazer.daggerexample.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 

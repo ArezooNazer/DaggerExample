@@ -6,8 +6,9 @@ import android.util.Log
 import com.arezoonazer.daggerexample.data.model.Photo
 import com.arezoonazer.daggerexample.data.remote.ApiResult
 import com.arezoonazer.daggerexample.data.repository.HomeRepository
+import javax.inject.Inject
 
-class HomeViewModel(private val repository: HomeRepository): ViewModel() {
+class HomeViewModel @Inject constructor(private val repository: HomeRepository): ViewModel() {
     val homeList = MutableLiveData<ArrayList<Photo>>()
 
     fun getHomeList() {
